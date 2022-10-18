@@ -1,1 +1,30 @@
-# No resources generated
+AWSTemplateFormatVersion: "2010-09-09"
+Metadata:
+    Generator: "former2"
+Description: ""
+Resources:
+    GlueCrawler:
+        Type: "AWS::Glue::Crawler"
+        Properties:
+            Name: "ap139885-test"
+            Role: "ap163885_glueservice_role"
+            Targets: 
+                S3Targets: 
+                  - 
+                    Path: "s3://fidinterviewbuck1/first_folder/"
+            DatabaseName: "ap139885_pap_db"
+            Description: "ap139885 crawler"
+            SchemaChangePolicy: 
+                UpdateBehavior: "UPDATE_IN_DATABASE"
+                DeleteBehavior: "DEPRECATE_IN_DATABASE"
+            TablePrefix: "finst_fph"
+            Configuration: "{\"Version\":1.0,\"Grouping\":{\"TableGroupingPolicy\":\"CombineCompatibleSchemas\",\"TableLevelConfiguration\":2}}"
+
+    GlueDatabase:
+        Type: "AWS::Glue::Database"
+        Properties:
+            DatabaseInput: 
+                Name: "ap139885_pap_db"
+                Description: "ap139885_pap_db"
+            CatalogId: !Ref "AWS::AccountId"
+
